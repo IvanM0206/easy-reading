@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Foco de lectura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="bar">
+  <div class="bar-in">
+    <strong class="brand">Foco de lectura</strong>
+    <div class="seg" role="group" aria-label="Qué sigue el foco">
+      <button type="button" data-mode="cursor" aria-pressed="true">Cursor</button>
+      <button type="button" data-mode="line" aria-pressed="false">Línea</button>
+    </div>
+    <div class="seg" role="group" aria-label="Efecto">
+      <button type="button" data-effect="blur" aria-pressed="true">Desenfoque</button>
+      <button type="button" data-effect="dim" aria-pressed="false">Resaltado</button>
+    </div>
+    <button type="button" class="switch" id="onoff" role="switch" aria-checked="true"><i></i>Enfoque</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <details class="panel" open>
+    <summary>Ajustes</summary>
+    <div class="panel-body">
+      <div class="field">
+        <label for="zone">Tamaño de la zona nítida <output id="zoneO"></output></label>
+        <input id="zone" type="range" min="1" max="10" step="1">
+      </div>
+      <div class="field">
+        <label for="strength">Intensidad del efecto <output id="strengthO"></output></label>
+        <input id="strength" type="range" min="1" max="10" step="1">
+      </div>
+      <div class="field">
+        <label for="fs">Tamaño de letra <output id="fsO"></output></label>
+        <input id="fs" type="range" min="16" max="30" step="1">
+      </div>
+      <div class="field" id="speedField" hidden>
+        <label for="spd">Segundos por línea <output id="spdO"></output></label>
+        <input id="spd" type="range" min="0.5" max="8" step="0.5">
+        <button type="button" class="play" id="play" aria-pressed="false">Avanzar solo</button>
+      </div>
+      <div class="field own">
+        <label for="mytext">Tu propio texto</label>
+        <textarea id="mytext" spellcheck="false" placeholder="Pegá acá lo que quieras leer. Separá los párrafos con una línea en blanco."></textarea>
+        <div class="row">
+          <button type="button" class="primary" id="useText">Usar este texto</button>
+          <button type="button" id="resetText">Volver al ejemplo</button>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <article class="text" id="reader" lang="es"></article>
+
+  <p class="hint" id="hint"></p>
+</main>
+
+<div id="veil" aria-hidden="true"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

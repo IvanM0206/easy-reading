@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Peaje de lectura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="bar">
+  <div class="bar-in">
+    <strong class="brand">Peaje de lectura</strong>
+    <div class="clock">
+      <div class="clock-top"><span>Próximo peaje en</span><output id="left" aria-live="off">0:45</output></div>
+      <div class="track" aria-hidden="true"><i id="fill"></i></div>
+    </div>
+    <button type="button" class="btn" id="testNow">Probar ahora</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <details class="panel" open>
+    <summary>Ajustes</summary>
+    <div class="panel-body">
+      <div class="field">
+        <label for="interval">Leer antes de cada peaje <output id="intervalO"></output></label>
+        <input id="interval" type="range" min="15" max="900" step="15">
+      </div>
+      <div class="field">
+        <label for="goal">Manzanas para pasar <output id="goalO"></output></label>
+        <input id="goal" type="range" min="1" max="15" step="1">
+      </div>
+      <div class="field">
+        <label for="speed">Velocidad de la serpiente <output id="speedO"></output></label>
+        <input id="speed" type="range" min="1" max="5" step="1">
+      </div>
+      <div class="field">
+        <label class="check"><input id="waitPause" type="checkbox"> Esperar a que dejes de desplazarte</label>
+        <label class="check"><input id="allowSkip" type="checkbox"> Permitir saltear el peaje</label>
+      </div>
+      <p class="stats" id="stats"></p>
+    </div>
+  </details>
+
+  <article class="text" id="reader" lang="es"></article>
+</main>
+
+<div id="toll" role="dialog" aria-modal="true" aria-labelledby="tollT" hidden>
+  <div class="card" id="card" tabindex="-1">
+    <h2 id="tollT">Peaje: un descanso para los ojos</h2>
+    <p id="tollMsg"></p>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <canvas id="cv" aria-label="Juego de la serpiente"></canvas>
+    <div class="dpad" aria-label="Controles">
+      <button type="button" class="u" data-d="up" aria-label="Arriba">▲</button>
+      <button type="button" class="l" data-d="left" aria-label="Izquierda">◀</button>
+      <button type="button" class="d" data-d="down" aria-label="Abajo">▼</button>
+      <button type="button" class="r" data-d="right" aria-label="Derecha">▶</button>
+    </div>
+    <div class="keys"><kbd>←</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>→</kbd> o <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd></div>
+    <button type="button" class="btn" id="skip">Saltear el peaje</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
