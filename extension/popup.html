@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foco de lectura</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<header>
+  <strong>Foco de lectura</strong>
+  <button type="button" class="switch" id="onoff" role="switch" aria-checked="false" aria-label="Activar foco"><i></i></button>
+</header>
+
+<div class="seg" role="group" aria-label="Efecto">
+  <button type="button" data-effect="blur" aria-pressed="true">Desenfoque</button>
+  <button type="button" data-effect="dim" aria-pressed="false">Resaltado</button>
+</div>
+
+<div class="field">
+  <label for="zone">Tamaño de la zona nítida <output id="zoneO"></output></label>
+  <input id="zone" type="range" min="1" max="10" step="1">
+</div>
+<div class="field">
+  <label for="strength">Intensidad del efecto <output id="strengthO"></output></label>
+  <input id="strength" type="range" min="1" max="10" step="1">
+</div>
+
+<p class="hint">Atajo: <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>F</kbd>. Podés cambiarlo en <code>chrome://extensions/shortcuts</code>. Recargá las pestañas que ya estaban abiertas la primera vez.</p>
+
+<script src="popup.js"></script>
+</body>
+</html>

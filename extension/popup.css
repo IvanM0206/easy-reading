@@ -1,0 +1,45 @@
+:root {
+  color-scheme: light;
+  --bg: #F2F5F6;
+  --fg: #17212B;
+  --muted: #5A6772;
+  --line: #D5DDE2;
+  --ctl: #E7EDF0;
+  --accent: #0B7A75;
+  --accent-fg: #FFFFFF;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #10171C; --fg: #DCE4EA; --muted: #93A1AC; --line: #2A3640;
+    --ctl: #1A242B; --accent: #4CC9BE; --accent-fg: #08201E;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; width: 300px; padding: 14px 16px 16px; display: grid; gap: 14px;
+  background: var(--bg); color: var(--fg); font: 14px/1.4 system-ui, sans-serif;
+}
+header { display: flex; align-items: center; justify-content: space-between; }
+header strong { font-size: 15px; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.switch { border: 0; background: transparent; cursor: pointer; padding: 2px; }
+.switch i { display: block; width: 40px; height: 22px; border-radius: 11px; background: var(--line); position: relative; transition: background .15s; }
+.switch i::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); transition: transform .15s; }
+.switch[aria-checked="true"] i { background: var(--accent); }
+.switch[aria-checked="true"] i::after { transform: translateX(18px); }
+
+.seg { display: flex; background: var(--ctl); border-radius: 8px; padding: 3px; gap: 2px; }
+.seg button { flex: 1; border: 0; background: transparent; padding: 6px 8px; border-radius: 6px; cursor: pointer; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); font-weight: 700; }
+
+.field { display: grid; gap: 4px; }
+.field label { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; }
+.field output { color: var(--fg); font-variant-numeric: tabular-nums; }
+input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; }
+
+.hint { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+kbd { border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; background: var(--ctl); font: inherit; font-size: 11px; }
+code { font-size: 11px; }
