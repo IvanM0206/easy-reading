@@ -32,7 +32,8 @@ button, input { font: inherit; color: inherit; }
 .switch[aria-checked="true"] i::after { transform: translateX(18px); }
 
 .seg { display: flex; background: var(--ctl); border-radius: 8px; padding: 3px; gap: 2px; }
-.seg button { flex: 1; border: 0; background: transparent; padding: 6px 8px; border-radius: 6px; cursor: pointer; color: var(--muted); }
+#effectHint { margin-top: -6px; min-height: 2.4em; }
+.seg button { flex: 1; border: 0; background: transparent; padding: 6px 4px; border-radius: 6px; cursor: pointer; color: var(--muted); }
 .seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); font-weight: 700; }
 
 .field { display: grid; gap: 4px; }
