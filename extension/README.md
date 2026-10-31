@@ -8,7 +8,11 @@ Versión 0.1: solo modo cursor. El modo línea y el peaje con minijuego todavía
 1. Abrí `chrome://extensions`.
 2. Activá **Modo de desarrollador** (arriba a la derecha).
 3. Tocá **Cargar descomprimida** y elegí esta carpeta (`extension/`).
-4. Si ya tenías pestañas abiertas, recargalas una vez.
+
+Para actualizarla después de un `git pull`, tocá el botón de recargar de la extensión en
+`chrome://extensions`. La extensión vuelve a cargarse sola en las pestañas abiertas; no hace
+falta recargarlas. En archivos locales (`file://`) solo funciona si activás **Permitir acceso
+a URLs de archivos** en los detalles de la extensión.
 
 ## Uso
 
@@ -45,6 +49,6 @@ cercanos al cursor, pero en los bordes de los bloques el texto quedaba legible y
 |---|---|
 | `manifest.json` | Declaración de la extensión (Manifest V3). |
 | `content.js` | La capa de enfoque que se inyecta en cada página. |
-| `background.js` | Atajo de teclado e indicador "ON" en el ícono. |
+| `background.js` | Atajo de teclado, indicador "ON" en el ícono y carga en pestañas ya abiertas. |
 | `popup.html`, `popup.css`, `popup.js` | Panel de ajustes. |
 | `icons/` | Íconos de 16, 32, 48 y 128 px. |

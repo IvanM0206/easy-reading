@@ -1,8 +1,11 @@
 // Content script: dibuja una capa fija sobre la página que atenúa o desenfoca todo
 // menos un círculo alrededor del cursor. No modifica el texto ni el DOM del sitio.
 (() => {
-  if (window.__focoLecturaLoaded) return;
-  window.__focoLecturaLoaded = true;
+  // Al recargar o actualizar la extensión, la copia anterior de este script queda viva en las
+  // pestañas abiertas pero desconectada de los ajustes. background.js vuelve a inyectar el script,
+  // y esta copia nueva desarma la anterior y su capa antes de crear la suya.
+  window.__focoLectura?.dispose();
+  document.querySelectorAll("#foco-lectura-host").forEach((el) => el.remove());
 
   const EFFECTS = ["dim", "blur"];
   const DEFAULTS = { on: false, effect: "dim", zone: 4, strength: 6, dimColor: "auto" };
@@ -69,7 +72,23 @@
     if (!raf && veil) raf = requestAnimationFrame(frame);
   }
 
+  // false cuando la extensión se recargó y esta copia del script quedó huérfana.
+  function alive() {
+    return Boolean(globalThis.chrome?.runtime?.id);
+  }
+
+  function dispose() {
+    removeEventListener("pointermove", onMove, true);
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
+    try { chrome.storage.onChanged.removeListener(onStorage); } catch (e) {}
+    if (host) host.remove();
+    host = null;
+    veil = null;
+  }
+
   function onMove(e) {
+    if (!alive()) { dispose(); return; }
     px = e.clientX;
     py = e.clientY;
     kick();
@@ -91,14 +110,18 @@
     kick();
   }
 
+  function onStorage(changes, area) {
+    if (area !== "sync") return;
+    for (const key of Object.keys(changes)) if (key in DEFAULTS) S[key] = changes[key].newValue;
+    apply();
+  }
+
+  window.__focoLectura = { dispose };
+
   chrome.storage.sync.get(DEFAULTS, (v) => {
     Object.assign(S, v);
     apply();
   });
 
-  chrome.storage.onChanged.addListener((changes, area) => {
-    if (area !== "sync") return;
-    for (const key of Object.keys(changes)) if (key in DEFAULTS) S[key] = changes[key].newValue;
-    apply();
-  });
+  chrome.storage.onChanged.addListener(onStorage);
 })();
