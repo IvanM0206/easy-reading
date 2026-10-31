@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Foco de lectura",
   "version": "0.1.0",
-  "description": "Desenfoca o atenúa todo el texto menos la zona alrededor del cursor para leer con menos distracciones.",
+  "description": "Atenúa o desenfoca todo el texto menos la zona alrededor del cursor para leer con menos distracciones.",
   "permissions": ["storage"],
   "action": {
     "default_title": "Foco de lectura",

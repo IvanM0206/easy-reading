@@ -13,11 +13,25 @@
 </header>
 
 <div class="seg" role="group" aria-label="Efecto">
-  <button type="button" data-effect="blur" aria-pressed="true">Desenfoque</button>
-  <button type="button" data-effect="tiles" aria-pressed="false">Rápido</button>
-  <button type="button" data-effect="dim" aria-pressed="false">Resaltado</button>
+  <button type="button" data-effect="dim" aria-pressed="true">Resaltado</button>
+  <button type="button" data-effect="blur" aria-pressed="false">Desenfoque</button>
 </div>
 <p class="hint" id="effectHint"></p>
+
+<div class="field" id="colorField">
+  <span class="label" id="colorLabel">Color del atenuado <output id="colorO"></output></span>
+  <div class="swatches" role="group" aria-labelledby="colorLabel">
+    <button type="button" class="swatch auto" data-color="auto" aria-pressed="true" title="Fondo de la página" aria-label="Fondo de la página">A</button>
+    <button type="button" class="swatch" data-color="#ffffff" aria-pressed="false" title="Blanco" aria-label="Blanco" style="--c:#ffffff"></button>
+    <button type="button" class="swatch" data-color="#f4ecd8" aria-pressed="false" title="Sepia" aria-label="Sepia" style="--c:#f4ecd8"></button>
+    <button type="button" class="swatch" data-color="#8a8f98" aria-pressed="false" title="Gris" aria-label="Gris" style="--c:#8a8f98"></button>
+    <button type="button" class="swatch" data-color="#1b2430" aria-pressed="false" title="Azul noche" aria-label="Azul noche" style="--c:#1b2430"></button>
+    <button type="button" class="swatch" data-color="#000000" aria-pressed="false" title="Negro" aria-label="Negro" style="--c:#000000"></button>
+    <label class="swatch custom" title="Otro color">
+      <input type="color" id="customColor" value="#cfe8ff" aria-label="Elegir otro color">
+    </label>
+  </div>
+</div>
 
 <div class="field">
   <label for="zone">Tamaño de la zona nítida <output id="zoneO"></output></label>

@@ -37,7 +37,23 @@ button, input { font: inherit; color: inherit; }
 .seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); font-weight: 700; }
 
 .field { display: grid; gap: 4px; }
-.field label { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; }
+.field[hidden] { display: none; }
+.field label, .field .label { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; }
+
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 2px; }
+.swatch {
+  width: 28px; height: 28px; border-radius: 50%; padding: 0; cursor: pointer;
+  border: 1px solid var(--line); background: var(--c, var(--ctl));
+  box-shadow: 0 0 0 2px var(--bg);
+}
+.swatch[aria-pressed="true"], .swatch.custom.on { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent); }
+.swatch.auto { font-size: 12px; font-weight: 700; color: var(--muted); }
+.swatch.custom {
+  position: relative; overflow: hidden; display: block;
+  background: conic-gradient(#e5484d, #f5a524, #46a758, #0b7a75, #3e63dd, #8e4ec6, #e5484d);
+}
+.swatch.custom input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border: 0; padding: 0; }
+.swatch.custom:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
 .field output { color: var(--fg); font-variant-numeric: tabular-nums; }
 input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; }
 

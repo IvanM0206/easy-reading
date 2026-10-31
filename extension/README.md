@@ -1,6 +1,6 @@
 # Foco de lectura (extensión de Chrome)
 
-Desenfoca o atenúa todo el texto de la página menos la zona alrededor del cursor.
+Atenúa o desenfoca todo el texto de la página menos la zona alrededor del cursor.
 Versión 0.1: solo modo cursor. El modo línea y el peaje con minijuego todavía no están.
 
 ## Instalar (modo desarrollador)
@@ -14,27 +14,23 @@ Versión 0.1: solo modo cursor. El modo línea y el peaje con minijuego todavía
 
 - Hacé clic en el ícono de la extensión para activar el foco, elegir el efecto
   y ajustar el tamaño de la zona y la intensidad. Efectos:
+  - **Resaltado** (por defecto): atenúa el resto del texto. Es el más liviano y, con
+    intensidad alta, lo oculta casi por completo. Se puede elegir el color del atenuado:
+    el fondo de la página (automático), blanco, sepia, gris, azul noche, negro u otro color.
   - **Desenfoque**: suave, pero el más pesado. Puede ir lento en equipos modestos.
-  - **Rápido** (experimental): desenfoque por bloques. Es más liviano, pero pueden verse
-    líneas semilegibles en los bordes de los bloques.
-  - **Resaltado**: solo atenúa. Es el más liviano.
 - Atajo para prender y apagar: `Alt+Shift+F`. Se cambia en `chrome://extensions/shortcuts`.
 - Mientras está activo, el ícono muestra "ON".
 
 ## Cómo funciona
 
 `content.js` agrega una capa fija, sin eventos de puntero, dentro de un Shadow DOM.
-La capa desenfoca (`backdrop-filter`) o atenúa todo, y una máscara circular deja nítida
-la zona del cursor. No toca el texto ni el DOM del sitio, por eso sirve en casi cualquier página.
+La capa atenúa todo con un color semitransparente, o lo desenfoca (`backdrop-filter`), y una
+máscara circular deja nítida la zona del cursor. No toca el texto ni el DOM del sitio, por eso
+sirve en casi cualquier página.
 
 En **Desenfoque**, cada vez que la máscara se mueve el navegador vuelve a desenfocar toda la
-pantalla. **Rápido** corta la capa en bloques de 160 px: al mover el cursor solo cambian los
-bloques cercanos, y el navegador redibuja solo esa zona. Una "lente" del tamaño de esos bloques
-recupera el borde circular y un atenuado suave baja el contraste del resto.
-
-El costo es visual: cada bloque solo desenfoca lo que tiene detrás, así que en sus bordes el
-texto queda menos desenfocado. Recortar bloques más grandes con `clip-path` no lo corrige,
-porque el navegador también recorta lo que el bloque toma de fondo.
+pantalla, y por eso es más pesado. Se probó cortar la capa en bloques para redibujar solo los
+cercanos al cursor, pero en los bordes de los bloques el texto quedaba legible y se descartó.
 
 ## Límites conocidos
 
